@@ -29,7 +29,7 @@ describe('Gilded Rose', function () {
         expect(items[0].sellIn).to.decrease;
     });
 
-    it('UpdateQuality must increase quality of the Aged Brie item', function (){
+    it('Aged Brie increase quality the older it gets', function (){
         const gildedRose = new GildedRose([ new Item('Aged Brie', 8, 9) ]);
         const items = gildedRose.updateQuality();
         expect(items[0].quality).to.increase;
@@ -50,12 +50,10 @@ describe('Gilded Rose', function () {
         expect(items[1].quality).to.equal(0);
     });
 
-    it('Aged Brie increase quality the older it gets', function (){
-        
-    });
-
     it('Quality of an item is never more than 50', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Aged Brie', 8, 50) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(50);
     });
 
     it('Sulfuras never has to be sold', function (){
