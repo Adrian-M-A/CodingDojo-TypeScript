@@ -17,22 +17,15 @@ describe('Gilded Rose', function () {
     });
 
     it('All item has a quality value', function (){
-        const gildedRose = new GildedRose([ new Item(null, null, 9) ]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).to.exist;
+        
     });
 
     it('UpdateQuality must lower quality and sellIn value of every item', function (){
-        const gildedRose = new GildedRose([ new Item('Cheese', 8, 9) ]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).to.decrease;
-        expect(items[0].sellIn).to.decrease;
+        
     });
 
     it('UpdateQuality must increase quality of the Aged Brie item', function (){
-        const gildedRose = new GildedRose([ new Item('Aged Brie', 8, 9) ]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].quality).to.increase;
+        
     });
 
     it('Quality degrades twice fast if sellIn value has passed', function (){
