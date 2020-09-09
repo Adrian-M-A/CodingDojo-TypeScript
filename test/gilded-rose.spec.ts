@@ -44,7 +44,10 @@ describe('Gilded Rose', function () {
     });
 
     it('Quality is never negative', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Cheese', -1, 1), new Item('Ham', 1, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(0);
+        expect(items[1].quality).to.equal(0);
     });
 
     it('Aged Brie increase quality the older it gets', function (){
