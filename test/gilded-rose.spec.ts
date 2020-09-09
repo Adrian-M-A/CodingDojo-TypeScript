@@ -36,7 +36,11 @@ describe('Gilded Rose', function () {
     });
 
     it('Quality degrades twice fast if sellIn value has passed', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Cheese', -1, 9), new Item('Ham', 1, 9) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(7);
+        expect(items[1].quality).to.equal(8);
+
     });
 
     it('Quality is never negative', function (){
