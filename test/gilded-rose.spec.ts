@@ -75,7 +75,9 @@ describe('Gilded Rose', function () {
     });
 
     it('Bakstage passes quality is 0 after the concert', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Backstage passes to a TAFKAL80ETC concert', -1, 20) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.equal(0);
     });
 
     it('conjured items degrade quality twice faster', function (){
