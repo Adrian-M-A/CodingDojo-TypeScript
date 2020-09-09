@@ -57,7 +57,9 @@ describe('Gilded Rose', function () {
     });
 
     it('Sulfuras never has to be sold', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Sulfuras, Hand of Ragnaros', 1, 20) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(1);
     });
 
     it('Bakstage passes, increases by 2 remaining 10 or less days', function (){
