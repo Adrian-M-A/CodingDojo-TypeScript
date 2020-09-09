@@ -17,7 +17,9 @@ describe('Gilded Rose', function () {
     });
 
     it('All item has a quality value', function (){
-        
+        const gildedRose = new GildedRose([ new Item(null, null, 9) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.exist;
     });
 
     it('UpdateQuality must lower quality and sellIn value of every item', function (){
