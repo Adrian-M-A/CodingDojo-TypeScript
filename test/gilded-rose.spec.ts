@@ -23,7 +23,10 @@ describe('Gilded Rose', function () {
     });
 
     it('UpdateQuality must lower quality and sellIn value of every item', function (){
-        
+        const gildedRose = new GildedRose([ new Item('Cheese', 8, 9) ]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.decrease;
+        expect(items[0].sellIn).to.decrease;
     });
 
     it('UpdateQuality must increase quality of the Aged Brie item', function (){
