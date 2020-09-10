@@ -1,3 +1,9 @@
+
+import { 
+    increaseQuality,
+    decreaseQuality
+ } from'./itemOptions';
+
 export class Item {
     name: string;
     sellIn: number;
@@ -21,8 +27,11 @@ export class GildedRose {
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if (this.items[i].quality > 0) {
+                    if(this.items[i].name  == 'Conjured items') {
+                        decreaseQuality(this.items[i]);
+                    }
                     if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
+                        decreaseQuality(this.items[i]);
                     }
                 }
             } else {
@@ -31,12 +40,12 @@ export class GildedRose {
                     if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
                         if (this.items[i].sellIn < 11) {
                             if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
+                                increaseQuality(this.items[i]);
                             }
                         }
                         if (this.items[i].sellIn < 6) {
                             if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
+                                increaseQuality(this.items[i]);
                             }
                         }
                     }
@@ -50,7 +59,7 @@ export class GildedRose {
                     if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
                         if (this.items[i].quality > 0) {
                             if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
+                                decreaseQuality(this.items[i]);
                             }
                         }
                     } else {
@@ -58,12 +67,9 @@ export class GildedRose {
                     }
                 } else {
                     if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1
+                        increaseQuality(this.items[i]);
                     }
                 }
-            }
-            if(this.items[i].name  == 'Conjured items') {
-                this.items[i].quality = this.items[i].quality -1;
             }
         }
 
