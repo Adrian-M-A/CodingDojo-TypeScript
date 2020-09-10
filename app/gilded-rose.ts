@@ -62,6 +62,9 @@ export class GildedRose {
                     }
                 }
             }
+            if(this.items[i].name  == 'Conjured items') {
+                this.items[i].quality = this.items[i].quality -1;
+            }
         }
 
         return this.items;
