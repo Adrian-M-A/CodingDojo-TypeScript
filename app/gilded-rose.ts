@@ -3,10 +3,9 @@ import {
     increaseQuality,
     decreaseQuality,
     zeroQuality,
-    decreaseSellInn,
-    decreaseQualityTwice,
-    isConjuredItem,
-    itemQualityIsPositive
+    itemQualityIsUnder50IncreaseQuality,
+    itemDifferentFromSulfurasDecreaseSellInn,
+    itemQualityIsPositiveDecreaseQuality
  } from'./itemOptions';
 
 export class Item {
@@ -28,55 +27,41 @@ export class GildedRose {
         this.items = items;
     }
 
-    updateQuality() {
+    updateQuality() {   
         for (let i = 0; i < this.items.length; i++) {
             let item = this.items[i];
+            
+
             if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros') {
-                if (itemQualityIsPositive(item)) {
-
-                    if(isConjuredItem(item)) {
-                        decreaseQualityTwice(item);
-
-                    } else {
-                        decreaseQuality(item);
-                    }
-                }
+                itemQualityIsPositiveDecreaseQuality(item);
+                
             } else {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1
+                    increaseQuality(item);
                     if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
                         if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                increaseQuality(item);
-                            }
+                            itemQualityIsUnder50IncreaseQuality(item);
                         }
                         if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                increaseQuality(item);
-                            }
+                            itemQualityIsUnder50IncreaseQuality(item);
                         }
                     }
                 }
             }
-            if (item.name != 'Sulfuras, Hand of Ragnaros') {
-                decreaseSellInn(item);
-            }
+
+            itemDifferentFromSulfurasDecreaseSellInn(item);
+            
+
             if (item.sellIn < 0) {
                 if (item.name != 'Aged Brie') {
-                    if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (itemQualityIsPositive(item)) {
-                            if (item.name != 'Sulfuras, Hand of Ragnaros') {
-                                decreaseQuality(item);
-                            }
-                        }
+                    if (item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros') {
+                        
                     } else {
                         zeroQuality(item);
                     }
                 } else {
-                    if (item.quality < 50) {
-                        increaseQuality(item);
-                    }
                 }
+                itemQualityIsPositiveDecreaseQuality(item);
             }
         }
 
