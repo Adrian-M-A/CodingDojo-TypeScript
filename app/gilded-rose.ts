@@ -1,11 +1,15 @@
 
 import { 
     increaseQuality,
-    decreaseQuality,
     zeroQuality,
+    itemDifferentFromAgredBrie,
     itemQualityIsUnder50IncreaseQuality,
     itemDifferentFromSulfurasDecreaseSellInn,
-    itemQualityIsPositiveDecreaseQuality
+    itemQualityIsPositiveDecreaseQuality,
+    itemDifferentFromBackstagePasses,
+    itemDifferentFromSulfuras,
+    itemQualityIsUnder50DecreaseQuality,
+    backstagePassesIncreaseQuality
  } from'./itemOptions';
 
 export class Item {
@@ -32,35 +36,24 @@ export class GildedRose {
             let item = this.items[i];
             
 
-            if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros') {
+            if (itemDifferentFromAgredBrie(item) && itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
                 itemQualityIsPositiveDecreaseQuality(item);
                 
             } else {
-                if (item.quality < 50) {
-                    increaseQuality(item);
-                    if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (item.sellIn < 11) {
-                            itemQualityIsUnder50IncreaseQuality(item);
-                        }
-                        if (item.sellIn < 6) {
-                            itemQualityIsUnder50IncreaseQuality(item);
-                        }
-                    }
-                }
+                itemQualityIsUnder50DecreaseQuality(item);
             }
 
             itemDifferentFromSulfurasDecreaseSellInn(item);
             
 
             if (item.sellIn < 0) {
-                if (item.name != 'Aged Brie') {
-                    if (item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros') {
+                if (itemDifferentFromAgredBrie(item)) {
+                    if (itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
                         
                     } else {
                         zeroQuality(item);
                     }
-                } else {
-                }
+                } 
                 itemQualityIsPositiveDecreaseQuality(item);
             }
         }
