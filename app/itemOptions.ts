@@ -114,6 +114,15 @@ export const itemQualityIsUnder50DecreaseQuality = (item: Item):void =>{
     }
 }
 
+export const decreaseQualityByItemName = (item: Item):void =>{
+    if (itemDifferentFromAgredBrie(item) && itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
+        itemQualityIsPositiveDecreaseQuality(item);
+        
+    } else {
+        itemQualityIsUnder50DecreaseQuality(item);
+    }
+}
+
 
 
 

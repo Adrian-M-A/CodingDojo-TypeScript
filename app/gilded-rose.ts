@@ -8,6 +8,7 @@ import {
     itemQualityIsPositiveDecreaseQuality,
     itemDifferentFromBackstagePasses,
     itemDifferentFromSulfuras,
+    decreaseQualityByItemName,
     itemQualityIsUnder50DecreaseQuality,
     backstagePassesIncreaseQuality
  } from'./itemOptions';
@@ -36,12 +37,7 @@ export class GildedRose {
             let item = this.items[i];
             
 
-            if (itemDifferentFromAgredBrie(item) && itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
-                itemQualityIsPositiveDecreaseQuality(item);
-                
-            } else {
-                itemQualityIsUnder50DecreaseQuality(item);
-            }
+            decreaseQualityByItemName(item);
 
             itemDifferentFromSulfurasDecreaseSellInn(item);
             
