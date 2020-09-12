@@ -18,10 +18,6 @@ export const decreaseQuality = (item: Item):void =>{
     item.quality -=  1;
 };
 
-export const decreaseQualityTwice = (item: Item):void =>{
-    item.quality -=  2;
-};
-
 export const decreaseSellInn = (item: Item):void =>{
     item.sellIn -=  1;
 };
@@ -30,13 +26,11 @@ export const zeroQuality = (item: Item):void =>{
     item.quality = 0;
 };
 
-export const isConjuredItemDecreaseAgain = (item: Item):boolean =>{  
+export const isConjuredItemDecreaseAgain = (item: Item):void =>{  
     if(item.name == conjuredItems) {
+        
         decreaseQuality(item);
-        return true;
     };
-
-    return false;
 }
 
 export const itemQualityIsPositiveDecreaseQuality = (item: Item):void =>{
@@ -49,6 +43,7 @@ export const itemQualityIsPositiveDecreaseQuality = (item: Item):void =>{
 
 export const itemQualityIsUnder50IncreaseQuality = (item: Item):void =>{
     if (item.quality < fifty) {
+        
         increaseQuality(item);
     }
 }
@@ -63,6 +58,7 @@ export const itemDifferentFromAgredBrie = (item: Item): boolean => {
 
 export const itemDifferentFromBackstagePasses = (item: Item): boolean => {
     if (item.name !== backstagePasses ) {
+        
         return true;
     }
     return false;
@@ -70,6 +66,7 @@ export const itemDifferentFromBackstagePasses = (item: Item): boolean => {
 
 export const itemDifferentFromSulfuras = (item: Item): boolean => {
     if (item.name !== sulfuras ) {
+        
         return true;
     }
     return false;
@@ -83,7 +80,8 @@ export const itemDifferentFromSulfurasDecreaseSellInn = (item: Item):void =>{
 }
 
 export const backstagePassesIncreaseQuality = (item:Item):void =>{
-    if (item.name == backstagePasses) {
+    if (!itemDifferentFromBackstagePasses(item)) {
+        
         increaseQualityBySellInnDay(item, eleven);
         increaseQualityBySellInnDay(item, six);
     }
@@ -91,35 +89,36 @@ export const backstagePassesIncreaseQuality = (item:Item):void =>{
 
 export const increaseQualityBySellInnDay = (item: Item, day: number):void =>{
     if (item.sellIn < day) {
+        
         itemQualityIsUnder50IncreaseQuality(item);
     }
 }
 
 export const decreaseQualityByItemName = (item: Item):void =>{
     if (itemDifferentFromAgredBrie(item) && itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
-        itemQualityIsPositiveDecreaseQuality(item);
-        
+       
+        itemQualityIsPositiveDecreaseQuality(item); 
     } 
     decreaseQualityForAgredBackstageOrSulfuras(item);
 }
 
 export const decreaseQualityForAgredBackstageOrSulfuras = (item: Item):void =>{
-    if(item.name == agedBrie || item.name == backstagePasses || item.name == sulfuras){
+    if(!itemDifferentFromAgredBrie(item) || !itemDifferentFromBackstagePasses(item) || !itemDifferentFromSulfuras(item)){
         itemQualityIsUnder50IncreaseQuality(item);
         backstagePassesIncreaseQuality(item);
     }
-    
 }
 
 export const itemNameIsBackstageOrSulfurasNoDecrease = (item: Item):void =>{
-    if (item.name == backstagePasses || item.name == sulfuras){
-        zeroQuality(item);
+    if (!itemDifferentFromBackstagePasses(item) || !itemDifferentFromSulfuras(item)){
         
+        zeroQuality(item);
     }
 }
 
 export const negativeSellInnDayDecreaseQuality = (item: Item):void =>{
     if (item.sellIn < 0) {
+        
         itemNameIsBackstageOrSulfurasNoDecrease(item);
         itemQualityIsPositiveDecreaseQuality(item);
     }
