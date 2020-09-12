@@ -1,10 +1,9 @@
 import { Item } from './interfaces/item';
 
-
-
 const zero = 0;
 const eleven = 11;
 const six = 6;
+const fifty = 50;
 const conjuredItems = 'Conjured items';
 const agedBrie = 'Aged Brie';
 const backstagePasses = 'Backstage passes to a TAFKAL80ETC concert';
@@ -33,24 +32,18 @@ export const zeroQuality = (item: Item):void =>{
 
 export const isConjuredItem = (item: Item):boolean =>{  
     if(item.name == conjuredItems) {
+        decreaseQuality(item);
         return true;
     };
 
     return false;
 }
 
-export const isConjuredItemDecreaseAgain = (item: Item):void =>{
-    if(item.name == conjuredItems) {
-
-        decreaseQuality(item);
-    };
-}
-
 export const itemQualityIsPositiveDecreaseQuality = (item: Item):void =>{
     if (item.quality > zero){
 
         decreaseQuality(item);
-        isConjuredItemDecreaseAgain(item);
+        isConjuredItem(item);
     }
 }
 
@@ -62,7 +55,7 @@ export const itemDifferentFromSulfurasDecreaseSellInn = (item: Item):void =>{
 }
 
 export const itemQualityIsUnder50IncreaseQuality = (item: Item):void =>{
-    if (item.quality < 50) {
+    if (item.quality < fifty) {
         increaseQuality(item);
     }
 }
@@ -89,14 +82,6 @@ export const itemDifferentFromSulfuras = (item: Item): boolean => {
     return false;
 }
 
-export const itemNameDifferentFromAgedBackstageSulfuras = (item: Item, name1: string, name2: string, name3: String) =>{
-    if (item.name != name1 && item.name != name2 && item.name != name3){
-        
-        return true;
-    }
-    return false;
-}
-
 export const backstagePassesIncreaseQuality = (item:Item):void =>{
     if (item.name == backstagePasses) {
         increaseQualityBySellInnDay(item, eleven);
@@ -114,10 +99,16 @@ export const decreaseQualityByItemName = (item: Item):void =>{
     if (itemDifferentFromAgredBrie(item) && itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
         itemQualityIsPositiveDecreaseQuality(item);
         
-    } else {
+    } 
+    decreaseQualityForAgredBackstageOrSulfuras(item);
+}
+
+export const decreaseQualityForAgredBackstageOrSulfuras = (item: Item):void =>{
+    if(item.name == agedBrie || item.name == backstagePasses || item.name == sulfuras){
         itemQualityIsUnder50IncreaseQuality(item);
         backstagePassesIncreaseQuality(item);
     }
+    
 }
 
 export const itemNameIsBackstageOrSulfurasNoDecrease = (item: Item):void =>{
