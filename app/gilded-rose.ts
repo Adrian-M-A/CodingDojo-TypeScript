@@ -1,16 +1,9 @@
 
-import { 
-    increaseQuality,
-    zeroQuality,
-    itemDifferentFromAgredBrie,
-    itemQualityIsUnder50IncreaseQuality,
+import {
     itemDifferentFromSulfurasDecreaseSellInn,
-    itemQualityIsPositiveDecreaseQuality,
-    itemDifferentFromBackstagePasses,
-    itemDifferentFromSulfuras,
     decreaseQualityByItemName,
-    itemQualityIsUnder50DecreaseQuality,
-    backstagePassesIncreaseQuality
+    negativeSellInnDayDecreaseQuality
+    
  } from'./itemOptions';
 
 export class Item {
@@ -38,17 +31,7 @@ export class GildedRose {
             
             decreaseQualityByItemName(item);
             itemDifferentFromSulfurasDecreaseSellInn(item);
-            
-            if (item.sellIn < 0) {
-                if (itemDifferentFromAgredBrie(item)) {
-                    if (itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {
-                        
-                    } else {
-                        zeroQuality(item);
-                    }
-                } 
-                itemQualityIsPositiveDecreaseQuality(item);
-            }
+            negativeSellInnDayDecreaseQuality(item);
         }
 
         return this.items;
