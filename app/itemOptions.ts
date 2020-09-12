@@ -30,7 +30,7 @@ export const zeroQuality = (item: Item):void =>{
     item.quality = 0;
 };
 
-export const isConjuredItem = (item: Item):boolean =>{  
+export const isConjuredItemDecreaseAgain = (item: Item):boolean =>{  
     if(item.name == conjuredItems) {
         decreaseQuality(item);
         return true;
@@ -43,14 +43,7 @@ export const itemQualityIsPositiveDecreaseQuality = (item: Item):void =>{
     if (item.quality > zero){
 
         decreaseQuality(item);
-        isConjuredItem(item);
-    }
-}
-
-export const itemDifferentFromSulfurasDecreaseSellInn = (item: Item):void =>{
-    if (item.name !=  sulfuras) {
-
-        decreaseSellInn(item);
+        isConjuredItemDecreaseAgain(item);
     }
 }
 
@@ -80,6 +73,13 @@ export const itemDifferentFromSulfuras = (item: Item): boolean => {
         return true;
     }
     return false;
+}
+
+export const itemDifferentFromSulfurasDecreaseSellInn = (item: Item):void =>{
+    if (itemDifferentFromSulfuras(item)) {
+
+        decreaseSellInn(item);
+    }
 }
 
 export const backstagePassesIncreaseQuality = (item:Item):void =>{
@@ -124,8 +124,3 @@ export const negativeSellInnDayDecreaseQuality = (item: Item):void =>{
         itemQualityIsPositiveDecreaseQuality(item);
     }
 }
-
-
-
-
-
