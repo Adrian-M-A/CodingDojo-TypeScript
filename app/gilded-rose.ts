@@ -36,12 +36,9 @@ export class GildedRose {
         for (let i = 0; i < this.items.length; i++) {
             let item = this.items[i];
             
-
             decreaseQualityByItemName(item);
-
             itemDifferentFromSulfurasDecreaseSellInn(item);
             
-
             if (item.sellIn < 0) {
                 if (itemDifferentFromAgredBrie(item)) {
                     if (itemDifferentFromBackstagePasses(item) && itemDifferentFromSulfuras(item)) {

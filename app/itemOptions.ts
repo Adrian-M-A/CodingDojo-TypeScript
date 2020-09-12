@@ -33,7 +33,6 @@ export const zeroQuality = (item: Item):void =>{
 
 export const isConjuredItem = (item: Item):boolean =>{  
     if(item.name == conjuredItems) {
-        
         return true;
     };
 
@@ -98,19 +97,14 @@ export const itemNameDifferentFromAgedBackstageSulfuras = (item: Item, name1: st
 
 export const backstagePassesIncreaseQuality = (item:Item):void =>{
     if (item.name == backstagePasses) {
-        if (item.sellIn < eleven) {
-            itemQualityIsUnder50IncreaseQuality(item);
-        }
-        if (item.sellIn < six) {
-            itemQualityIsUnder50IncreaseQuality(item);
-        }
+        increaseQualityBySellInnDay(item, eleven);
+        increaseQualityBySellInnDay(item, six);
     }
 }
 
-export const itemQualityIsUnder50DecreaseQuality = (item: Item):void =>{
-    if (item.quality < 50) {
-        increaseQuality(item);
-        backstagePassesIncreaseQuality(item);
+export const increaseQualityBySellInnDay = (item: Item, day: number):void =>{
+    if (item.sellIn < day) {
+        itemQualityIsUnder50IncreaseQuality(item);
     }
 }
 
@@ -119,7 +113,8 @@ export const decreaseQualityByItemName = (item: Item):void =>{
         itemQualityIsPositiveDecreaseQuality(item);
         
     } else {
-        itemQualityIsUnder50DecreaseQuality(item);
+        itemQualityIsUnder50IncreaseQuality(item);
+        backstagePassesIncreaseQuality(item);
     }
 }
 
