@@ -1,8 +1,7 @@
 
 import {
-    itemDifferentFromSulfurasDecreaseSellInn,
     decreaseQualityByItemName,
-    negativeSellInnDayDecreaseQuality
+    decreaseSellInByItem
     
  } from'./itemOptions';
 
@@ -30,8 +29,7 @@ export class GildedRose {
             let item = this.items[i];
             
             decreaseQualityByItemName(item);
-            itemDifferentFromSulfurasDecreaseSellInn(item);
-            negativeSellInnDayDecreaseQuality(item);
+            decreaseSellInByItem(item);
         }
 
         return this.items;
